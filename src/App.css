@@ -1,0 +1,127 @@
+.completed {
+  color: grey;
+  text-decoration: line-through;
+}
+
+.selected {
+  color: black;
+}
+
+.null {
+  display: none;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+input {
+  font: inherit;
+}
+
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+section {
+  background-color: white;
+  padding: 0 1rem 0 1rem;
+  border-radius: 2px;
+}
+
+h1 {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.container main .input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: x-large;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+main ul {
+  display: flex;
+  flex-direction: column;
+}
+
+main li {
+  display: flex;
+  min-height: 2rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  border-bottom: 1px solid grey;
+  font-size: 1.25rem;
+}
+
+main li:last-child {
+  border-bottom: none;
+}
+
+li label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+li label input {
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+main li button {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+footer {
+  background-color: #F4FCE8;
+  display: flex;
+  border-top: 1px solid grey;
+  min-height: 3rem;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+footer .button {
+  margin-right: 2rem;
+
+}
+footer button {
+  color: gray;
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+}
+
+footer ul {
+  display: flex;
+  translate: -50%;
+  transition: translate 0.2s ease-in-out, z-index 0.2s ease-in-out;
+  z-index: -1;
+}
+
+footer p {
+  margin-left: auto;
+}
+
+.move {
+  translate: 0;
+  z-index: 1;
+}
