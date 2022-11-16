@@ -31,6 +31,7 @@ function App() {
     rightButton: null,
     searchButton: false,
   });
+
   const inputRef = useRef<HTMLInputElement | null>(null);
   const todoRef = useRef<HTMLUListElement | null>(null);
   const firstRender = useRef(true);
@@ -107,7 +108,7 @@ function App() {
     }
   };
 
-  const handleChangeState = (id: string) => {
+  const handleToggleTodo = (id: string) => {
     const newList = [...todoList];
     const todo = newList.find(todo => todo.id === id);
     todo!.isCompleted = !todo!.isCompleted;
@@ -149,7 +150,7 @@ function App() {
           />
           <TodoList
             todoList={todoList}
-            handleChangeState={handleChangeState}
+            handleToggleTodo={handleToggleTodo}
             handleDeleteTodo={handleDeleteTodo}
             todoRef={todoRef}
           />

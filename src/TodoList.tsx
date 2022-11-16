@@ -3,14 +3,14 @@ import { ITodoList } from "./App";
 
 type Props = {
   todoList: ITodoList;
-  handleChangeState(id: string): void;
+  handleToggleTodo(id: string): void;
   handleDeleteTodo(id: string): void;
   todoRef: React.MutableRefObject<HTMLUListElement | null>;
 };
 
 const TodoList = ({
   todoList,
-  handleChangeState,
+  handleToggleTodo,
   handleDeleteTodo,
   todoRef,
 }: Props) => {
@@ -19,7 +19,7 @@ const TodoList = ({
       {todoList.map(todo => (
         <Todo
           todo={todo}
-          handleChangeState={handleChangeState}
+          handleToggleTodo={handleToggleTodo}
           handleDeleteTodo={handleDeleteTodo}
           key={todo.id}
         />

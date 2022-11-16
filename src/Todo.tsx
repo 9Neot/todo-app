@@ -2,18 +2,18 @@ import { ITodo } from "./App";
 
 type Props = {
   todo: ITodo;
-  handleChangeState(id: string): void;
+  handleToggleTodo(id: string): void;
   handleDeleteTodo(id: string): void;
 };
 
-const Todo = ({ todo, handleChangeState, handleDeleteTodo }: Props) => {
+const Todo = ({ todo, handleToggleTodo, handleDeleteTodo }: Props) => {
   let className = "";
   if (todo.isCompleted) {
     className = "completed";
   }
 
   const changeStateOnClick = () => {
-    handleChangeState(todo.id);
+    handleToggleTodo(todo.id);
   };
 
   const handleDeleteOnClick = () => {
