@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import LeftButtons from "./LeftButtons";
 import HiddenButtons from "./HiddenButtons";
 import TextBar from "./TextBar";
+import { todoHandleContext } from "./todoHandleContext";
 
 export interface ITodo {
   id: string;
@@ -148,12 +149,13 @@ function App() {
             handleSearchTodo={handleSearchTodo}
             inputRef={inputRef}
           />
-          <TodoList
-            todoList={todoList}
-            handleToggleTodo={handleToggleTodo}
-            handleDeleteTodo={handleDeleteTodo}
-            todoRef={todoRef}
-          />
+          <ul ref={todoRef}>
+            <todoHandleContext.Provider
+              value={{ handleToggleTodo, handleDeleteTodo }}
+            >
+              <TodoList todoList={todoList} />
+            </todoHandleContext.Provider>
+          </ul>
         </main>
       </section>
       <footer>
