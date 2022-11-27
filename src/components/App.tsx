@@ -1,78 +1,16 @@
 import React, { useCallback, useRef, useReducer, useState } from "react";
 import "./App.css";
-import TodoList from "./TodoList";
-import { v4 as uuidv4 } from "uuid";
+import TodoList from "./main/TodoList";
 import { useEffect } from "react";
-import LeftButtons from "./LeftButtons";
-import HiddenButtons from "./HiddenButtons";
-import TextBar from "./TextBar";
-import { todoHandleContext } from "./todoHandleContext";
-
-export interface ITodo {
-  id: string;
-  todoName: string;
-  isCompleted: boolean;
-}
-
-export type ITodoList = ITodo[];
-
-export interface IButton {
-  leftButton: number | null;
-  rightButton: number | null;
-  searchButton: boolean;
-}
-
-type todoAction =
-  | {
-      type: "add";
-      payload: {
-        value: string;
-      };
-    }
-  | {
-      type: "delete";
-      payload: {
-        id: string;
-      };
-    }
-  | {
-      type: "toggle";
-      payload: {
-        id: string;
-      };
-    }
-  | {
-      type: "fetchData";
-      payload: ITodoList;
-    };
+import LeftButtons from "./footer/LeftButtons";
+import HiddenButtons from "./footer/HiddenButtons";
+import TextBar from "./main/TextBar";
+import { todoHandleContext } from "../contexts/todoHandleContext";
+import { IButton, ITodoList } from "../types/types";
+import todoReducer from "../reducers/todoReducer";
 
 const initialTodoList: ITodoList = [];
 const TODOLIST_STORAGE = "todoStorage";
-
-const todoReducer = (todoList: ITodoList, action: todoAction) => {
-  switch (action.type) {
-    case "add":
-      return [
-        ...todoList,
-        { id: uuidv4(), todoName: action.payload.value, isCompleted: false },
-      ];
-    case "delete":
-      return todoList.filter(todo => todo.id !== action.payload.id);
-    case "toggle": {
-      return todoList.map(todo => {
-        if (todo.id !== action.payload.id) {
-          return todo;
-        }
-        return { ...todo, isCompleted: !todo.isCompleted };
-      });
-    }
-    case "fetchData": {
-      return [...action.payload];
-    }
-    default:
-      return todoList;
-  }
-};
 
 function App() {
   const [selectedButton, setSelectedButton] = useState<IButton>({
@@ -212,7 +150,7 @@ function App() {
           clearInput={clearInput}
           focusInput={focusInput}
         />
-        <p>{todoList.length} items left</p>
+        <em>{todoList.length} items left</em>
       </footer>
     </div>
   );

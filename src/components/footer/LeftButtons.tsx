@@ -1,4 +1,4 @@
-import { IButton } from "./App";
+import { IButton } from "../App";
 
 export type Props = {
   selectedButton: IButton;

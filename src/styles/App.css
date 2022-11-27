@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: azure;
+}
+
 .completed {
   color: grey;
   text-decoration: line-through;
@@ -29,6 +42,7 @@ input {
 .container {
   max-width: 600px;
   margin: 2rem auto;
+  box-shadow: 10px 10px 5px #aaa;
 }
 
 section {
@@ -75,7 +89,6 @@ li label {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   overflow: hidden;
   margin-right: 1rem;
 }
@@ -83,6 +96,8 @@ li label {
 li label input {
   cursor: pointer;
   margin-right: 0.5rem;
+  width: 1rem;
+  height: 1rem;
 }
 
 main li button {
@@ -117,7 +132,7 @@ footer ul {
   z-index: -1;
 }
 
-footer p {
+footer em {
   margin-left: auto;
 }
 

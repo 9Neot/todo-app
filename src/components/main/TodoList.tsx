@@ -1,5 +1,5 @@
 import Todo from "./Todo";
-import { ITodoList } from "./App";
+import { ITodoList } from "../App";
 
 type Props = {
   todoList: ITodoList;
