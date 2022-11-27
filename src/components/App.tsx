@@ -1,13 +1,18 @@
-import React, { useCallback, useRef, useReducer, useState } from "react";
+import React, {
+  useCallback,
+  useRef,
+  useReducer,
+  useState,
+  useEffect,
+} from "react";
 import "../styles/App.css";
 import TodoList from "./main/TodoList";
-import { useEffect } from "react";
-import LeftButtons from "./footer/LeftButtons";
-import HiddenButtons from "./footer/HiddenButtons";
 import TextBar from "./main/TextBar";
-import { todoHandleContext } from "../contexts/todoHandleContext";
+import todoHandlerContext from "../contexts/todoHandleContext";
 import { IButton, ITodoList } from "../global/types";
 import todoReducer from "../reducers/todoReducer";
+import Button from "./footer/Button";
+import buttonHandlerContext from "../contexts/buttonHandleContext";
 
 const initialTodoList: ITodoList = [];
 const TODOLIST_STORAGE = "todoStorage";
@@ -129,27 +134,20 @@ function App() {
             inputRef={inputRef}
           />
           <ul ref={todoRef}>
-            <todoHandleContext.Provider
+            <todoHandlerContext.Provider
               value={{ handleToggleTodo, handleDeleteTodo }}
             >
               <TodoList todoList={todoList} />
-            </todoHandleContext.Provider>
+            </todoHandlerContext.Provider>
           </ul>
         </main>
       </section>
       <footer>
-        <LeftButtons
-          selectedButton={selectedButton}
-          setSelectedButton={setSelectedButton}
-          clearInput={clearInput}
-          focusInput={focusInput}
-        />
-        <HiddenButtons
-          selectedButton={selectedButton}
-          setSelectedButton={setSelectedButton}
-          clearInput={clearInput}
-          focusInput={focusInput}
-        />
+        <buttonHandlerContext.Provider
+          value={{ selectedButton, setSelectedButton, clearInput, focusInput }}
+        >
+          <Button></Button>
+        </buttonHandlerContext.Provider>
         <em>{todoList.length} items left</em>
       </footer>
     </div>

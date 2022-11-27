@@ -1,4 +1,4 @@
-import { todoHandleContext } from "../../contexts/todoHandleContext";
+import todoHandleContext from "../../contexts/todoHandleContext";
 import { ITodo } from "../../global/types";
 
 type Props = {
@@ -6,16 +6,11 @@ type Props = {
 };
 
 const Todo = ({ todo }: Props) => {
-  let className = "";
-  if (todo.isCompleted) {
-    className = "completed";
-  }
-
   return (
     <todoHandleContext.Consumer>
       {value => (
         <li>
-          <label className={className}>
+          <label className={todo.isCompleted ? "completed" : ""}>
             <input
               type="checkbox"
               onClick={() => value?.handleToggleTodo(todo.id)}

@@ -1,8 +1,9 @@
 import { createContext } from "react";
 
-interface ITodoProps {
+interface ITodoHandler {
   handleToggleTodo: (id: string) => void;
   handleDeleteTodo: (id: string) => void;
 }
 
-export const todoHandleContext = createContext<ITodoProps | null>(null);
+const todoHandlerContext = createContext<ITodoHandler | null>(null);
+export default todoHandlerContext;

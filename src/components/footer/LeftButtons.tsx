@@ -1,71 +1,63 @@
-import { IButton } from "../../global/types";
+import buttonHandlerContext from "../../contexts/buttonHandleContext";
 
-export type Props = {
-  selectedButton: IButton;
-  setSelectedButton: React.Dispatch<React.SetStateAction<IButton>>;
-  clearInput: () => void;
-  focusInput: () => void;
-};
-
-const LeftButtons = ({
-  selectedButton,
-  setSelectedButton,
-  clearInput,
-  focusInput,
-}: Props) => {
+const LeftButtons = () => {
   return (
-    <div className="button">
-      <button
-        title="Add New"
-        className={selectedButton.leftButton === 1 ? "selected" : ""}
-        onClick={() => {
-          clearInput();
-          if (selectedButton.leftButton !== 1) {
-            setSelectedButton(pre => {
-              return {
-                ...pre,
-                leftButton: 1,
-                searchButton: false,
-                rightButton: null,
-              };
-            });
-          } else {
-            setSelectedButton(pre => {
-              return {
-                ...pre,
-                leftButton: null,
-              };
-            });
-          }
-          focusInput();
-        }}
-      >
-        <i className="fa-sharp fa-solid fa-plus"></i>
-      </button>
-      <button
-        title="Filter"
-        className={selectedButton.leftButton === 2 ? "selected" : ""}
-        onClick={() => {
-          clearInput();
-          if (selectedButton.leftButton !== 2) {
-            setSelectedButton(pre => {
-              return { ...pre, leftButton: 2 };
-            });
-          } else {
-            setSelectedButton(pre => {
-              return {
-                ...pre,
-                leftButton: null,
-                rightButton: null,
-                searchButton: false,
-              };
-            });
-          }
-        }}
-      >
-        <i className="fa-solid fa-filter"></i>{" "}
-      </button>
-    </div>
+    <buttonHandlerContext.Consumer>
+      {value => (
+        <div className="button">
+          <button
+            title="Add New"
+            className={value?.selectedButton.leftButton === 1 ? "selected" : ""}
+            onClick={() => {
+              value?.clearInput();
+              if (value?.selectedButton.leftButton !== 1) {
+                value?.setSelectedButton(pre => {
+                  return {
+                    ...pre,
+                    leftButton: 1,
+                    searchButton: false,
+                    rightButton: null,
+                  };
+                });
+              } else {
+                value?.setSelectedButton(pre => {
+                  return {
+                    ...pre,
+                    leftButton: null,
+                  };
+                });
+              }
+              value?.focusInput();
+            }}
+          >
+            <i className="fa-sharp fa-solid fa-plus"></i>
+          </button>
+          <button
+            title="Filter"
+            className={value?.selectedButton.leftButton === 2 ? "selected" : ""}
+            onClick={() => {
+              value?.clearInput();
+              if (value?.selectedButton.leftButton !== 2) {
+                value?.setSelectedButton(pre => {
+                  return { ...pre, leftButton: 2 };
+                });
+              } else {
+                value?.setSelectedButton(pre => {
+                  return {
+                    ...pre,
+                    leftButton: null,
+                    rightButton: null,
+                    searchButton: false,
+                  };
+                });
+              }
+            }}
+          >
+            <i className="fa-solid fa-filter"></i>{" "}
+          </button>
+        </div>
+      )}
+    </buttonHandlerContext.Consumer>
   );
 };
 
