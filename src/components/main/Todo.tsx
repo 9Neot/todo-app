@@ -1,5 +1,5 @@
 import { todoHandleContext } from "../../contexts/todoHandleContext";
-import { ITodo } from "../../types/types";
+import { ITodo } from "../../global/types";
 
 type Props = {
   todo: ITodo;

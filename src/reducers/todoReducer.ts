@@ -1,4 +1,4 @@
-import { ITodoList, todoAction } from "../types/types";
+import { ITodoList, todoAction } from "../global/types";
 import { v4 as uuidv4 } from "uuid";
 
 const todoReducer = (todoList: ITodoList, action: todoAction) => {

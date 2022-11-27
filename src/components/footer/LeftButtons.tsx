@@ -1,4 +1,4 @@
-import { IButton } from "../../types/types";
+import { IButton } from "../../global/types";
 
 export type Props = {
   selectedButton: IButton;

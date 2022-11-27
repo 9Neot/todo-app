@@ -6,7 +6,7 @@ import LeftButtons from "./footer/LeftButtons";
 import HiddenButtons from "./footer/HiddenButtons";
 import TextBar from "./main/TextBar";
 import { todoHandleContext } from "../contexts/todoHandleContext";
-import { IButton, ITodoList } from "../types/types";
+import { IButton, ITodoList } from "../global/types";
 import todoReducer from "../reducers/todoReducer";
 
 const initialTodoList: ITodoList = [];

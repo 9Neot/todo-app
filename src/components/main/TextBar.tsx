@@ -1,5 +1,5 @@
 import React from "react";
-import { IButton } from "../../types/types";
+import { IButton } from "../../global/types";
 
 type Props = {
   selectedButton: IButton;

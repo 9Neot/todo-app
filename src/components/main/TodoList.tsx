@@ -1,4 +1,4 @@
-import { ITodoList } from "../../types/types";
+import { ITodoList } from "../../global/types";
 import Todo from "./Todo";
 
 type Props = {
