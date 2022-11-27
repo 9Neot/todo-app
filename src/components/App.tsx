@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useReducer, useState } from "react";
-import "./App.css";
+import "../styles/App.css";
 import TodoList from "./main/TodoList";
 import { useEffect } from "react";
 import LeftButtons from "./footer/LeftButtons";
