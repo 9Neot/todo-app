@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useRef,
-  useReducer,
-  useState,
-  useEffect,
-} from "react";
+import React, { useCallback, useRef, useReducer, useState } from "react";
 import "../styles/App.css";
 import TodoList from "./main/TodoList";
 import TextBar from "./main/TextBar";
@@ -13,9 +7,10 @@ import { IButton, ITodoList } from "../global/types";
 import todoReducer from "../reducers/todoReducer";
 import Button from "./footer/Button";
 import buttonHandlerContext from "../contexts/buttonHandleContext";
+import useLocalStorage from "../hooks/useLocalStorage";
+import useFilter from "../hooks/useFilter";
 
 const initialTodoList: ITodoList = [];
-const TODOLIST_STORAGE = "todoStorage";
 
 function App() {
   const [selectedButton, setSelectedButton] = useState<IButton>({
@@ -27,63 +22,13 @@ function App() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const todoRef = useRef<HTMLUListElement | null>(null);
   const firstRender = useRef(true);
-
-  const searchTodo = useCallback(
-    (regex: RegExp) => {
-      todoList.forEach((todo, index) => {
-        if (regex.test(todo.todoName)) {
-          (todoRef.current as HTMLUListElement).children[index].className = "";
-        } else {
-          (todoRef.current as HTMLUListElement).children[index].className =
-            "null";
-        }
-      });
-    },
-    [todoList]
+  const [searchTodo, filterByButton] = useFilter(
+    todoList,
+    todoRef,
+    selectedButton,
+    inputRef
   );
-
-  const filterByButton = useCallback(() => {
-    if (selectedButton.rightButton === 1) {
-      todoList.forEach((todo, index) => {
-        if (todo.isCompleted) {
-          (todoRef.current as HTMLUListElement).children[index].className =
-            "null";
-        }
-      });
-    }
-    if (selectedButton.rightButton === 2) {
-      todoList.forEach((todo, index) => {
-        if (!todo.isCompleted) {
-          (todoRef.current as HTMLUListElement).children[index].className =
-            "null";
-        }
-      });
-    }
-  }, [selectedButton.rightButton, todoList]);
-
-  useEffect(() => {
-    const newList: ITodoList = JSON.parse(
-      localStorage.getItem(TODOLIST_STORAGE) as string
-    );
-    todoDispatch({ type: "fetchData", payload: newList });
-  }, []);
-
-  useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
-    localStorage.setItem(TODOLIST_STORAGE, JSON.stringify(todoList));
-  }, [todoList]);
-
-  useEffect(() => {
-    const value = (inputRef.current as HTMLInputElement)?.value;
-    if (value !== null) {
-      const regex = new RegExp(value, "i");
-      searchTodo(regex);
-    }
-    filterByButton();
-  }, [selectedButton, todoList, searchTodo, filterByButton]);
+  useLocalStorage(todoDispatch, todoList, firstRender);
 
   const handleAddTodo = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -105,12 +50,15 @@ function App() {
     todoDispatch({ type: "delete", payload: { id: id } });
   };
 
-  const handleSearchTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const regex = new RegExp(value, "i");
-    searchTodo(regex);
-    filterByButton();
-  };
+  const handleSearchTodo = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      const regex = new RegExp(value, "i");
+      searchTodo(regex);
+      filterByButton();
+    },
+    [filterByButton, searchTodo]
+  );
 
   const clearInput = () => {
     if (inputRef.current) {
