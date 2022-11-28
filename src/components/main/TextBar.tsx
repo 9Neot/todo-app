@@ -15,27 +15,20 @@ const TextBar = ({
   handleSearchTodo,
 }: Props) => {
   return (
-    <>
-      {selectedButton.leftButton === 1 ? (
-        <input
-          type="text"
-          placeholder="Add New"
-          onKeyDown={handleAddTodo}
-          className="input"
-          ref={inputRef}
-        />
-      ) : selectedButton.leftButton === 2 ? (
-        <input
-          type="text"
-          placeholder="Search"
-          onChange={handleSearchTodo}
-          className="input"
-          ref={inputRef}
-        ></input>
-      ) : (
-        <input className="null"></input>
-      )}
-    </>
+    <input
+      className={selectedButton.leftButton ? "input" : "null"}
+      type="text"
+      placeholder={
+        selectedButton.leftButton === 1
+          ? "Add New"
+          : selectedButton.leftButton === 2
+          ? "Search"
+          : ""
+      }
+      onKeyDown={selectedButton.leftButton === 1 ? handleAddTodo : () => {}}
+      onChange={selectedButton.leftButton === 2 ? handleSearchTodo : () => {}}
+      ref={inputRef}
+    />
   );
 };
 
