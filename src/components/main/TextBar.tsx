@@ -6,6 +6,7 @@ type Props = {
   handleAddTodo: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   inputRef: React.MutableRefObject<HTMLInputElement | null>;
   handleSearchTodo: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setSelectedButton: React.Dispatch<React.SetStateAction<IButton>>;
 };
 
 const TextBar = ({
@@ -13,6 +14,7 @@ const TextBar = ({
   handleAddTodo,
   inputRef,
   handleSearchTodo,
+  setSelectedButton,
 }: Props) => {
   return (
     <input
@@ -28,6 +30,15 @@ const TextBar = ({
       onKeyDown={selectedButton.leftButton === 1 ? handleAddTodo : () => {}}
       onChange={selectedButton.leftButton === 2 ? handleSearchTodo : () => {}}
       ref={inputRef}
+      onFocus={
+        selectedButton.leftButton === 2
+          ? () => {
+              setSelectedButton(pre => {
+                return { ...pre, searchButton: true };
+              });
+            }
+          : () => {}
+      }
     />
   );
 };

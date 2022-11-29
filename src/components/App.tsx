@@ -17,6 +17,7 @@ function App() {
     leftButton: null,
     rightButton: null,
     searchButton: false,
+    starButton: false,
   });
   const [todoList, todoDispatch] = useReducer(todoReducer, initialTodoList);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -70,6 +71,10 @@ function App() {
     inputRef.current?.focus();
   };
 
+  const handleStarButton = (id: string) => {
+    todoDispatch({ type: "mark", payload: { id: id } });
+  };
+
   return (
     <div className="container">
       <section>
@@ -80,10 +85,11 @@ function App() {
             handleAddTodo={handleAddTodo}
             handleSearchTodo={handleSearchTodo}
             inputRef={inputRef}
+            setSelectedButton={setSelectedButton}
           />
           <ul ref={todoRef}>
             <todoHandlerContext.Provider
-              value={{ handleToggleTodo, handleDeleteTodo }}
+              value={{ handleToggleTodo, handleDeleteTodo, handleStarButton }}
             >
               <TodoList todoList={todoList} />
             </todoHandlerContext.Provider>

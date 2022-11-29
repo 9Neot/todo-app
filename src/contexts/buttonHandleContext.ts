@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import { IButton } from '../global/types';
 
-interface IButtonHandler {
+export interface IButtonHandler {
   selectedButton: IButton
   setSelectedButton: React.Dispatch<React.SetStateAction<IButton>>
   clearInput: () => void
@@ -9,4 +9,5 @@ interface IButtonHandler {
 }
 
 const buttonHandlerContext = createContext<IButtonHandler | null>(null);
+
 export default buttonHandlerContext;

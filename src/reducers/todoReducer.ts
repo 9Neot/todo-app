@@ -6,18 +6,24 @@ const todoReducer = (todoList: ITodoList, action: todoAction) => {
     case "add":
       return [
         ...todoList,
-        { id: uuidv4(), todoName: action.payload.value, isCompleted: false },
+        { id: uuidv4(), todoName: action.payload.value, isCompleted: false, isMarked: false },
       ];
     case "delete":
       return todoList.filter(todo => todo.id !== action.payload.id);
-    case "toggle": {
+    case "toggle": 
       return todoList.map(todo => {
         if (todo.id !== action.payload.id) {
           return todo;
         }
         return { ...todo, isCompleted: !todo.isCompleted };
       });
-    }
+    case "mark": 
+      return todoList.map(todo => {
+        if (todo.id !== action.payload.id) {
+          return todo;
+        }
+        return { ...todo, isMarked: !todo.isMarked};
+      });
     case "fetchData": {
       return [...action.payload];
     }

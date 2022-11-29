@@ -1,4 +1,6 @@
-import todoHandleContext from "../../contexts/todoHandleContext";
+import todoHandleContext, {
+  ITodoHandler,
+} from "../../contexts/todoHandleContext";
 import { ITodo } from "../../global/types";
 
 type Props = {
@@ -8,21 +10,36 @@ type Props = {
 const Todo = ({ todo }: Props) => {
   return (
     <todoHandleContext.Consumer>
-      {value => (
-        <li>
-          <label className={todo.isCompleted ? "completed" : ""}>
-            <input
-              type="checkbox"
-              onClick={() => value?.handleToggleTodo(todo.id)}
-              defaultChecked={todo.isCompleted}
-            />
-            {todo.todoName}
-          </label>
-          <button onClick={() => value?.handleDeleteTodo(todo.id)}>
-            <i className="fa-solid fa-trash-can"></i>
-          </button>
-        </li>
-      )}
+      {value => {
+        const { handleToggleTodo, handleDeleteTodo, handleStarButton } =
+          value as ITodoHandler;
+        return (
+          <li>
+            <label className={todo.isCompleted ? "completed" : ""}>
+              <input
+                type="checkbox"
+                onClick={() => handleToggleTodo(todo.id)}
+                defaultChecked={todo.isCompleted}
+              />
+              {todo.todoName}
+            </label>
+            <div className="button">
+              <button onClick={() => handleStarButton(todo.id)}>
+                <i
+                  className={
+                    todo.isMarked
+                      ? "fa-regular fa-star marked"
+                      : "fa-regular fa-star"
+                  }
+                ></i>
+              </button>
+              <button onClick={() => handleDeleteTodo(todo.id)}>
+                <i className="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </li>
+        );
+      }}
     </todoHandleContext.Consumer>
   );
 };

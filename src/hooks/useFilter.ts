@@ -38,7 +38,15 @@ const useFilter = (
         }
       });
     }
-  }, [selectedButton.rightButton, todoList, todoRef]);
+    if (selectedButton.starButton) {
+      todoList.forEach((todo, index) => {
+        if (!todo.isMarked) {
+          (todoRef.current as HTMLUListElement).children[index].className =
+            "null";
+        }
+      });
+    }
+  }, [selectedButton, todoList, todoRef]);
 
   useEffect(() => {
     const value = (inputRef.current as HTMLInputElement)?.value;
