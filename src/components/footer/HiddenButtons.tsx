@@ -53,7 +53,7 @@ const HiddenButtons = () => {
                 className={selectedButton.rightButton === 2 ? "selected" : ""}
                 onClick={() => changeRightButtonBehavior(2)}
               >
-                <i className="fa-regular fa-square-check"></i>{" "}
+                <i className="fa-regular fa-square-check"></i>
               </button>
             </li>
             <li>
@@ -67,6 +67,22 @@ const HiddenButtons = () => {
                 }}
               >
                 <i className="fa-regular fa-star"></i>
+              </button>
+            </li>
+            <li>
+              <button
+                title="Arrange"
+                className={selectedButton.arrangeButton ? "selected" : ""}
+                onClick={() => {
+                  setSelectedButton(pre => {
+                    return {
+                      ...pre,
+                      arrangeButton: !selectedButton.arrangeButton,
+                    };
+                  });
+                }}
+              >
+                <i className="fa-solid fa-arrow-down-a-z"></i>
               </button>
             </li>
           </ul>

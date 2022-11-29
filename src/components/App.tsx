@@ -18,6 +18,7 @@ function App() {
     rightButton: null,
     searchButton: false,
     starButton: false,
+    arrangeButton: false,
   });
   const [todoList, todoDispatch] = useReducer(todoReducer, initialTodoList);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -89,16 +90,28 @@ function App() {
           />
           <ul ref={todoRef}>
             <todoHandlerContext.Provider
-              value={{ handleToggleTodo, handleDeleteTodo, handleStarButton }}
+              value={{
+                handleToggleTodo,
+                handleDeleteTodo,
+                handleStarButton,
+              }}
             >
-              <TodoList todoList={todoList} />
+              <TodoList
+                todoList={todoList}
+                arrangeButton={selectedButton.arrangeButton}
+              />
             </todoHandlerContext.Provider>
           </ul>
         </main>
       </section>
       <footer>
         <buttonHandlerContext.Provider
-          value={{ selectedButton, setSelectedButton, clearInput, focusInput }}
+          value={{
+            selectedButton,
+            setSelectedButton,
+            clearInput,
+            focusInput,
+          }}
         >
           <Button></Button>
         </buttonHandlerContext.Provider>

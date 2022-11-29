@@ -12,6 +12,7 @@ interface IButton {
   rightButton: number | null;
   searchButton: boolean;
   starButton: boolean;
+  arrangeButton: boolean
 }
 
 type todoAction =
@@ -42,6 +43,6 @@ type todoAction =
   | {
       type: "fetchData";
       payload: ITodoList;
-    };
-
+    }
+    
 export type {ITodo, IButton, ITodoList, todoAction};

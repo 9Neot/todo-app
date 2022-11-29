@@ -6,7 +6,7 @@ const todoReducer = (todoList: ITodoList, action: todoAction) => {
     case "add":
       return [
         ...todoList,
-        { id: uuidv4(), todoName: action.payload.value, isCompleted: false, isMarked: false },
+        { id: todoList.length + uuidv4(), todoName: action.payload.value, isCompleted: false, isMarked: false },
       ];
     case "delete":
       return todoList.filter(todo => todo.id !== action.payload.id);

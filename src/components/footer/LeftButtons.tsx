@@ -24,6 +24,7 @@ const LeftButtons = () => {
                       searchButton: false,
                       rightButton: null,
                       starButton: false,
+                      arrangeButton: false,
                     };
                   });
                 } else {
@@ -55,6 +56,7 @@ const LeftButtons = () => {
                       rightButton: null,
                       searchButton: false,
                       starButton: false,
+                      arrangeButton: false,
                     };
                   });
                 }
