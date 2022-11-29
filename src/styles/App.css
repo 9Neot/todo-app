@@ -74,11 +74,13 @@ h1 {
 main ul {
   display: flex;
   flex-direction: column;
+  max-height: 513px;
+  overflow: auto;
 }
 
 main li {
   display: flex;
-  min-height: 2rem;
+  min-height: 57px;
   padding-bottom: 1rem;
   padding-top: 1rem;
   border-bottom: 1px solid grey;
