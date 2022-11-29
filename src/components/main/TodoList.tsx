@@ -14,7 +14,7 @@ const TodoList = ({ todoList, arrangeButton }: Props) => {
             .sort((a, b) => a.todoName.localeCompare(b.todoName))
             .map(todo => <Todo todo={todo} key={todo.id} />)
         : todoList
-            .sort((a, b) => a.id.localeCompare(b.id))
+            .sort((a, b) => a.index - b.index)
             .map(todo => <Todo todo={todo} key={todo.id} />)}
     </>
   );

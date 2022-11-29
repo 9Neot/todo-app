@@ -28,7 +28,7 @@ const Todo = ({ todo }: Props) => {
                 <i
                   className={
                     todo.isMarked
-                      ? "fa-regular fa-star marked"
+                      ? "fa-solid fa-star marked"
                       : "fa-regular fa-star"
                   }
                 ></i>

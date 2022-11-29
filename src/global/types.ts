@@ -3,6 +3,7 @@ interface ITodo {
   todoName: string;
   isCompleted: boolean;
   isMarked: boolean;
+  index: number;
 }
 
 type ITodoList = ITodo[];
