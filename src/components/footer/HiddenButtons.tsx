@@ -8,6 +8,16 @@ const HiddenButtons = () => {
       {value => {
         const { selectedButton, setSelectedButton, clearInput, focusInput } =
           value as IButtonHandler;
+        const changeRightButtonBehavior = (id: number) => {
+          setSelectedButton(pre => {
+            return { ...pre, rightButton: null };
+          });
+          if (selectedButton.rightButton !== id) {
+            setSelectedButton(pre => {
+              return { ...pre, rightButton: id };
+            });
+          }
+        };
         return (
           <ul className={selectedButton.leftButton === 2 ? "move" : ""}>
             <li>
@@ -32,16 +42,7 @@ const HiddenButtons = () => {
               <button
                 title="Active"
                 className={selectedButton.rightButton === 1 ? "selected" : ""}
-                onClick={() => {
-                  setSelectedButton(pre => {
-                    return { ...pre, rightButton: null };
-                  });
-                  if (selectedButton.rightButton !== 1) {
-                    setSelectedButton(pre => {
-                      return { ...pre, rightButton: 1 };
-                    });
-                  }
-                }}
+                onClick={() => changeRightButtonBehavior(1)}
               >
                 <i className="fa-solid fa-spinner"></i>
               </button>
@@ -50,16 +51,7 @@ const HiddenButtons = () => {
               <button
                 title="Completed"
                 className={selectedButton.rightButton === 2 ? "selected" : ""}
-                onClick={() => {
-                  setSelectedButton(pre => {
-                    return { ...pre, rightButton: null };
-                  });
-                  if (selectedButton.rightButton !== 2) {
-                    setSelectedButton(pre => {
-                      return { ...pre, rightButton: 2 };
-                    });
-                  }
-                }}
+                onClick={() => changeRightButtonBehavior(2)}
               >
                 <i className="fa-regular fa-square-check"></i>{" "}
               </button>
