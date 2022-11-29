@@ -54,6 +54,7 @@ const LeftButtons = () => {
                       leftButton: null,
                       rightButton: null,
                       searchButton: false,
+                      starButton: false,
                     };
                   });
                 }
