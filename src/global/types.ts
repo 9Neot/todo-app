@@ -45,5 +45,11 @@ type todoAction =
       type: "fetchData";
       payload: ITodoList;
     }
-    
+  | {
+      type: "edit";
+      payload: {
+        id: string;
+        value: string;
+      }
+    }  
 export type {ITodo, IButton, ITodoList, todoAction};

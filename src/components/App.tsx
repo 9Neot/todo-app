@@ -76,6 +76,20 @@ function App() {
     todoDispatch({ type: "mark", payload: { id: id } });
   };
 
+  const handleEditTodo = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    id: string
+  ) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const value = (e.target as HTMLInputElement).value;
+
+      if (value) {
+        todoDispatch({ type: "edit", payload: { id: id, value: value } });
+      }
+      (e.target as HTMLInputElement).blur();
+    }
+  };
   return (
     <div className="container">
       <section>
@@ -94,6 +108,7 @@ function App() {
                 handleToggleTodo,
                 handleDeleteTodo,
                 handleStarButton,
+                handleEditTodo,
               }}
             >
               <TodoList

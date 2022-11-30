@@ -16,7 +16,7 @@ body {
 }
 
 .completed {
-  color: grey;
+  color: grey !important;
   text-decoration: line-through;
 }
 
@@ -85,21 +85,25 @@ main li {
   padding-top: 1rem;
   border-bottom: 1px solid grey;
   font-size: 1.25rem;
+  align-items: center;
 }
 
 main li:last-child {
   border-bottom: none;
 }
 
-li label {
+li input[type="text"] {
   cursor: pointer;
   display: flex;
   align-items: center;
-  overflow: hidden;
-  margin-right: 1rem;
+  width: 430px;
+  text-overflow: ellipsis;
+  border: none;
+  color: black;
+  background-color: inherit;
 }
 
-li label input {
+li input[type="checkbox"] {
   cursor: pointer;
   margin-right: 0.5rem;
   width: 1rem;
@@ -126,8 +130,8 @@ footer {
 
 footer .button {
   margin-right: 2rem;
-
 }
+
 footer button {
   color: gray;
   margin-right: 0.5rem;

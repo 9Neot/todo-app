@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import todoHandleContext, {
   ITodoHandler,
 } from "../../contexts/todoHandleContext";
@@ -8,23 +9,45 @@ type Props = {
 };
 
 const Todo = ({ todo }: Props) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
   return (
     <todoHandleContext.Consumer>
       {value => {
-        const { handleToggleTodo, handleDeleteTodo, handleStarButton } =
-          value as ITodoHandler;
+        const {
+          handleToggleTodo,
+          handleDeleteTodo,
+          handleStarButton,
+          handleEditTodo,
+        } = value as ITodoHandler;
+        const handleEditButton = () => {
+          inputRef.current?.removeAttribute("disabled");
+          inputRef.current?.focus();
+          inputRef.current?.setSelectionRange(0, inputRef.current.value.length);
+        };
         return (
           <li>
-            <label className={todo.isCompleted ? "completed" : ""}>
-              <input
-                type="checkbox"
-                onClick={() => handleToggleTodo(todo.id)}
-                defaultChecked={todo.isCompleted}
-              />
-              {todo.todoName}
-            </label>
+            <input
+              type="checkbox"
+              onClick={() => handleToggleTodo(todo.id)}
+              defaultChecked={todo.isCompleted}
+            />
+            <input
+              id="label"
+              className={todo.isCompleted ? "completed" : ""}
+              ref={inputRef}
+              type="text"
+              defaultValue={todo.todoName}
+              onKeyDown={e => handleEditTodo(e, todo.id)}
+              onBlur={e => {
+                e.target.setAttribute("disabled", "true");
+              }}
+              disabled={true}
+            />
             <div className="button">
-              <button onClick={() => handleStarButton(todo.id)}>
+              <button title="Edit" onClick={() => handleEditButton()}>
+                <i className="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button title="Star" onClick={() => handleStarButton(todo.id)}>
                 <i
                   className={
                     todo.isMarked
@@ -33,7 +56,7 @@ const Todo = ({ todo }: Props) => {
                   }
                 ></i>
               </button>
-              <button onClick={() => handleDeleteTodo(todo.id)}>
+              <button title="Remove" onClick={() => handleDeleteTodo(todo.id)}>
                 <i className="fa-solid fa-trash-can"></i>
               </button>
             </div>

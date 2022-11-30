@@ -27,6 +27,14 @@ const todoReducer = (todoList: ITodoList, action: todoAction) => {
     case "fetchData": {
       return [...action.payload];
     }
+    case "edit": {
+      return todoList.map(todo => {
+        if (todo.id !== action.payload.id) {
+          return todo;
+        }
+        return { ...todo, todoName: action.payload.value };
+      });
+    }
     default:
       return todoList;
   }
