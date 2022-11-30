@@ -18,6 +18,7 @@ body {
 .completed {
   color: grey !important;
   text-decoration: line-through;
+  font-weight: normal !important;
 }
 
 .selected {
@@ -101,11 +102,12 @@ li input[type="text"] {
   border: none;
   color: black;
   background-color: inherit;
+  font-weight: 600;
 }
 
 li input[type="checkbox"] {
   cursor: pointer;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
   width: 1rem;
   height: 1rem;
 }
@@ -140,9 +142,9 @@ footer button {
 
 footer ul {
   display: flex;
-  translate: -50%;
-  transition: translate 0.2s ease-in-out, z-index 0.2s ease-in-out;
-  z-index: -1;
+  visibility: hidden;
+  translate: -40%;
+  transition: translate 0.4s ease-in-out, visibility 0.2s ease-in-out;
 }
 
 footer em {
@@ -150,6 +152,6 @@ footer em {
 }
 
 .move {
+  visibility: visible;
   translate: 0;
-  z-index: 1;
 }
