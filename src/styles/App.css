@@ -26,7 +26,8 @@ body {
 }
 
 .null {
-  display: none;
+  width: 0px;
+  opacity:0;
 }
 
 li {
@@ -45,9 +46,18 @@ input {
 }
 
 .container {
-  max-width: 600px;
-  margin: 2rem auto;
+  display: flex;
+  max-width: 1000px;
+  height: 600px;
+  margin: 4rem auto;
   box-shadow: 10px 10px 5px #aaa;
+  background-color: white
+}
+
+.mainContent {
+  min-width: 600px;
+  max-height: 100%;
+  position: relative;
 }
 
 section {
@@ -59,7 +69,6 @@ section {
 h1 {
   text-align: center;
   padding: 1rem;
-  margin-top: 2rem;
   font-weight: bold;
   font-size: xx-large;
 }
@@ -75,7 +84,7 @@ h1 {
 main ul {
   display: flex;
   flex-direction: column;
-  max-height: 513px;
+  max-height: 400px;
   overflow: auto;
 }
 
@@ -128,6 +137,9 @@ footer {
   min-height: 3rem;
   align-items: center;
   padding: 0 0.5rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 footer .button {
