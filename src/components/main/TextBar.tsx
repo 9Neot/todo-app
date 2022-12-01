@@ -39,6 +39,21 @@ const TextBar = ({
             }
           : () => {}
       }
+      onBlur={
+        selectedButton.leftButton === 2
+          ? () => {
+              setSelectedButton(pre => {
+                return { ...pre, searchButton: false };
+              });
+            }
+          : selectedButton.leftButton === 1
+          ? () => {
+              setSelectedButton(pre => {
+                return { ...pre, leftButton: null };
+              });
+            }
+          : () => {}
+      }
     />
   );
 };
