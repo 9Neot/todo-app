@@ -4,6 +4,8 @@ interface ITodo {
   isCompleted: boolean;
   isMarked: boolean;
   index: number;
+  description: string;
+  isSelected: boolean
 }
 
 type ITodoList = ITodo[];
@@ -20,7 +22,7 @@ type todoAction =
   | {
       type: "add";
       payload: {
-        value: string;
+        name: string;
       };
     }
   | {
@@ -49,7 +51,21 @@ type todoAction =
       type: "edit";
       payload: {
         id: string;
-        value: string;
+        name: string;
       }
     }  
+  | {
+      type: "select";
+      payload: {
+        id: string;
+      }
+    }
+  | {
+    type: "changeDescription";
+    payload: {
+      id: string;
+      description: string;
+    }
+  }
+
 export type {ITodo, IButton, ITodoList, todoAction};

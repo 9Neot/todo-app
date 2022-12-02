@@ -10,6 +10,13 @@ type Props = {
 
 const Todo = ({ todo }: Props) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleEditButton = () => {
+    inputRef.current?.removeAttribute("disabled");
+    inputRef.current?.focus();
+    inputRef.current?.setSelectionRange(0, inputRef.current.value.length);
+  };
+
   return (
     <todoHandleContext.Consumer>
       {value => {
@@ -18,12 +25,8 @@ const Todo = ({ todo }: Props) => {
           handleDeleteTodo,
           handleStarButton,
           handleEditTodo,
+          handleDescriptionButton,
         } = value as ITodoHandler;
-        const handleEditButton = () => {
-          inputRef.current?.removeAttribute("disabled");
-          inputRef.current?.focus();
-          inputRef.current?.setSelectionRange(0, inputRef.current.value.length);
-        };
         return (
           <li>
             <input
@@ -44,8 +47,14 @@ const Todo = ({ todo }: Props) => {
               disabled={true}
             />
             <div className="button">
-              <button title="Edit" onClick={() => handleEditButton()}>
+              <button title="Edit title" onClick={handleEditButton}>
                 <i className="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button
+                title="Description"
+                onClick={() => handleDescriptionButton(todo.id)}
+              >
+                <i className="fa-regular fa-note-sticky"></i>
               </button>
               <button title="Star" onClick={() => handleStarButton(todo.id)}>
                 <i

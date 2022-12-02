@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -47,7 +47,6 @@ button {
   border-radius: 50%;
   width: 28px;
   height: 28px;
-
 }
 
 button:hover {
@@ -59,32 +58,19 @@ input {
 }
 
 .container {
+  min-width: 600px;
+  max-width: fit-content;
   display: flex;
-  max-width: 1000px;
   height: 600px;
   margin: 4rem auto;
   box-shadow: 10px 10px 5px #aaa;
-  background-color: white
+  background-color: white;
 }
 
 .mainContent {
   min-width: 600px;
   max-height: 100%;
   position: relative;
-}
-
-aside {
-  width: 100%;
-  min-height: 100%;
-}
-aside textarea {
-  width: 100%;
-  height: 100%;
-  font-size: 1rem;
-  padding: 1rem;
-  background-color: rgb(243, 243, 179);
-  resize: none;
-  border: none;
 }
 
 section {
@@ -98,6 +84,10 @@ h1 {
   padding: 1rem;
   font-weight: bold;
   font-size: xx-large;
+}
+
+.container main {
+  max-width: 100%;
 }
 
 .container main .input {
@@ -132,7 +122,7 @@ main li:last-child {
 li input[type="text"] {
   display: flex;
   align-items: center;
-  width: 440px;
+  max-width: 100%;
   text-overflow: ellipsis;
   border: none;
   color: black;
@@ -159,7 +149,7 @@ main li button {
 }
 
 footer {
-  background-color: #F4FCE8;
+  background-color: #f4fce8;
   display: flex;
   border-top: 1px solid grey;
   min-height: 3rem;
@@ -194,4 +184,39 @@ footer em {
 .move {
   visibility: visible;
   translate: 0;
+}
+
+aside {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* opacity: 0;
+  width: 0; */
+  opacity: 1;
+  width: 400px;
+  background-color: rgb(243, 243, 179);
+}
+
+aside span {
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+}
+
+aside textarea {
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  padding: 1.25rem;
+  resize: none;
+  border: none;
+  background-color: inherit;
+}
+
+aside textarea:focus {
+  outline: none;
+}
+
+.asideShow {
+  width: 400px;
+  opacity: 1;
 }

@@ -23,6 +23,7 @@ function App() {
   const [todoList, todoDispatch] = useReducer(todoReducer, initialTodoList);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const todoRef = useRef<HTMLUListElement | null>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const firstRender = useRef(true);
   const [searchTodo, filterByButton] = useFilter(
     todoList,
@@ -35,21 +36,20 @@ function App() {
   const handleAddTodo = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      const value = (e.target as HTMLInputElement).value;
-
-      if (value) {
-        todoDispatch({ type: "add", payload: { value: value } });
+      const name = (e.target as HTMLInputElement).value;
+      if (name) {
+        todoDispatch({ type: "add", payload: { name } });
       }
       (e.target as HTMLInputElement).value = "";
     }
   };
 
   const handleToggleTodo = (id: string) => {
-    todoDispatch({ type: "toggle", payload: { id: id } });
+    todoDispatch({ type: "toggle", payload: { id } });
   };
 
   const handleDeleteTodo = (id: string) => {
-    todoDispatch({ type: "delete", payload: { id: id } });
+    todoDispatch({ type: "delete", payload: { id } });
   };
 
   const handleSearchTodo = useCallback(
@@ -73,7 +73,7 @@ function App() {
   };
 
   const handleStarButton = (id: string) => {
-    todoDispatch({ type: "mark", payload: { id: id } });
+    todoDispatch({ type: "mark", payload: { id } });
   };
 
   const handleEditTodo = (
@@ -82,56 +82,81 @@ function App() {
   ) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      const value = (e.target as HTMLInputElement).value;
+      const name = (e.target as HTMLInputElement).value;
 
-      if (value) {
-        todoDispatch({ type: "edit", payload: { id: id, value: value } });
+      if (name) {
+        todoDispatch({ type: "edit", payload: { id, name } });
       }
       (e.target as HTMLInputElement).blur();
     }
   };
+
+  const handleDescriptionButton = (id: string) => {
+    const todo = todoList.find(todo => todo.id === id);
+    (textAreaRef.current as HTMLTextAreaElement).value = todo!.description;
+    todoDispatch({ type: "select", payload: { id } });
+    (textAreaRef.current as HTMLTextAreaElement).focus();
+  };
+
+  const handleChangeTextArea = () => {
+    const description = (textAreaRef.current as HTMLTextAreaElement).value;
+    const todo = todoList.find(todo => todo.isSelected);
+    todoDispatch({
+      type: "changeDescription",
+      payload: { id: todo!.id, description },
+    });
+  };
+
   return (
     <div className="container">
-      <section>
-        <h1>THINGS TO DO</h1>
-        <main>
-          <TextBar
-            selectedButton={selectedButton}
-            handleAddTodo={handleAddTodo}
-            handleSearchTodo={handleSearchTodo}
-            inputRef={inputRef}
-            setSelectedButton={setSelectedButton}
-          />
-          <ul ref={todoRef}>
-            <todoHandlerContext.Provider
-              value={{
-                handleToggleTodo,
-                handleDeleteTodo,
-                handleStarButton,
-                handleEditTodo,
-              }}
-            >
-              <TodoList
-                todoList={todoList}
-                arrangeButton={selectedButton.arrangeButton}
-              />
-            </todoHandlerContext.Provider>
-          </ul>
-        </main>
-      </section>
-      <footer>
-        <buttonHandlerContext.Provider
-          value={{
-            selectedButton,
-            setSelectedButton,
-            clearInput,
-            focusInput,
-          }}
-        >
-          <Button></Button>
-        </buttonHandlerContext.Provider>
-        <em>{todoList.length} items left</em>
-      </footer>
+      <div className="mainContent">
+        <section>
+          <h1>THINGS TO DO</h1>
+          <main>
+            <TextBar
+              selectedButton={selectedButton}
+              handleAddTodo={handleAddTodo}
+              handleSearchTodo={handleSearchTodo}
+              inputRef={inputRef}
+              setSelectedButton={setSelectedButton}
+            />
+            <ul ref={todoRef}>
+              <todoHandlerContext.Provider
+                value={{
+                  handleToggleTodo,
+                  handleDeleteTodo,
+                  handleStarButton,
+                  handleEditTodo,
+                  textAreaRef,
+                  handleDescriptionButton,
+                }}
+              >
+                <TodoList
+                  todoList={todoList}
+                  arrangeButton={selectedButton.arrangeButton}
+                />
+              </todoHandlerContext.Provider>
+            </ul>
+          </main>
+        </section>
+        <footer>
+          <buttonHandlerContext.Provider
+            value={{
+              selectedButton,
+              setSelectedButton,
+              clearInput,
+              focusInput,
+            }}
+          >
+            <Button></Button>
+          </buttonHandlerContext.Provider>
+          <em>{todoList.length} items left</em>
+        </footer>
+      </div>
+      <aside>
+        <span>Note:</span>
+        <textarea ref={textAreaRef} onChange={handleChangeTextArea}></textarea>
+      </aside>
     </div>
   );
 }
