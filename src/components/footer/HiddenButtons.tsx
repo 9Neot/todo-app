@@ -9,13 +9,9 @@ const HiddenButtons = () => {
         const { selectedButton, setSelectedButton, clearInput, focusInput } =
           value as IButtonHandler;
         const changeRightButtonBehavior = (id: number) => {
-          setSelectedButton(pre => {
-            return { ...pre, rightButton: null };
-          });
+          setSelectedButton(pre => ({ ...pre, rightButton: null }));
           if (selectedButton.rightButton !== id) {
-            setSelectedButton(pre => {
-              return { ...pre, rightButton: id };
-            });
+            setSelectedButton(pre => ({ ...pre, rightButton: id }));
           }
         };
         return (
@@ -29,9 +25,10 @@ const HiddenButtons = () => {
                     focusInput();
                   } else {
                     clearInput();
-                    setSelectedButton(pre => {
-                      return { ...pre, searchButton: !pre.searchButton };
-                    });
+                    setSelectedButton(pre => ({
+                      ...pre,
+                      searchButton: !pre.searchButton,
+                    }));
                   }
                 }}
               >
@@ -61,9 +58,10 @@ const HiddenButtons = () => {
                 title="Important"
                 className={selectedButton.starButton ? "selected" : ""}
                 onClick={() => {
-                  setSelectedButton(pre => {
-                    return { ...pre, starButton: !selectedButton.starButton };
-                  });
+                  setSelectedButton(pre => ({
+                    ...pre,
+                    starButton: !selectedButton.starButton,
+                  }));
                 }}
               >
                 <i className="fa-regular fa-star"></i>
@@ -74,12 +72,10 @@ const HiddenButtons = () => {
                 title="Arrange"
                 className={selectedButton.arrangeButton ? "selected" : ""}
                 onClick={() => {
-                  setSelectedButton(pre => {
-                    return {
-                      ...pre,
-                      arrangeButton: !selectedButton.arrangeButton,
-                    };
-                  });
+                  setSelectedButton(pre => ({
+                    ...pre,
+                    arrangeButton: !selectedButton.arrangeButton,
+                  }));
                 }}
               >
                 <i className="fa-solid fa-arrow-down-a-z"></i>

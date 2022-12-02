@@ -15,18 +15,16 @@ const LeftButtons = () => {
               className={selectedButton.leftButton === 1 ? "selected" : ""}
               onClick={() => {
                 clearInput();
-                focusInput();
                 if (selectedButton.leftButton !== 1) {
-                  setSelectedButton(pre => {
-                    return {
-                      ...pre,
-                      leftButton: 1,
-                      searchButton: false,
-                      rightButton: null,
-                      starButton: false,
-                      arrangeButton: false,
-                    };
-                  });
+                  focusInput();
+                  setSelectedButton(pre => ({
+                    ...pre,
+                    leftButton: 1,
+                    searchButton: false,
+                    rightButton: null,
+                    starButton: false,
+                    arrangeButton: false,
+                  }));
                 } else {
                   setSelectedButton(pre => {
                     return {
@@ -45,20 +43,16 @@ const LeftButtons = () => {
               onClick={() => {
                 clearInput();
                 if (selectedButton.leftButton !== 2) {
-                  setSelectedButton(pre => {
-                    return { ...pre, leftButton: 2 };
-                  });
+                  setSelectedButton(pre => ({ ...pre, leftButton: 2 }));
                 } else {
-                  setSelectedButton(pre => {
-                    return {
-                      ...pre,
-                      leftButton: null,
-                      rightButton: null,
-                      searchButton: false,
-                      starButton: false,
-                      arrangeButton: false,
-                    };
-                  });
+                  setSelectedButton(pre => ({
+                    ...pre,
+                    leftButton: null,
+                    rightButton: null,
+                    searchButton: false,
+                    starButton: false,
+                    arrangeButton: false,
+                  }));
                 }
               }}
             >

@@ -33,25 +33,19 @@ const TextBar = ({
       onFocus={
         selectedButton.leftButton === 2
           ? () => {
-              setSelectedButton(pre => {
-                return { ...pre, searchButton: true };
-              });
+              setSelectedButton(pre => ({ ...pre, searchButton: true }));
             }
           : () => {}
       }
       onBlur={
         selectedButton.leftButton === 2
           ? () => {
-              setSelectedButton(pre => {
-                return { ...pre, searchButton: false };
-              });
+              setSelectedButton(pre => ({ ...pre, searchButton: false }));
             }
           : selectedButton.leftButton === 1
           ? () =>
               setTimeout(() => {
-                setSelectedButton(pre => {
-                  return { ...pre, leftButton: null };
-                });
+                setSelectedButton(pre => ({ ...pre, leftButton: null }));
               }, 122)
           : () => {}
       }
