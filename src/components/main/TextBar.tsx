@@ -18,7 +18,7 @@ const TextBar = ({
 }: Props) => {
   return (
     <input
-      className={selectedButton.leftButton ? "input" : "null"}
+      className={selectedButton.leftButton ? "input" : "hidden"}
       type="text"
       placeholder={
         selectedButton.leftButton === 1
@@ -47,11 +47,12 @@ const TextBar = ({
               });
             }
           : selectedButton.leftButton === 1
-          ? () => {
-              setSelectedButton(pre => {
-                return { ...pre, leftButton: null };
-              });
-            }
+          ? () =>
+              setTimeout(() => {
+                setSelectedButton(pre => {
+                  return { ...pre, leftButton: null };
+                });
+              }, 122)
           : () => {}
       }
     />
