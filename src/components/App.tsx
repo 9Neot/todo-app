@@ -95,68 +95,87 @@ function App() {
     const todo = todoList.find(todo => todo.id === id);
     (textAreaRef.current as HTMLTextAreaElement).value = todo!.description;
     todoDispatch({ type: "select", payload: { id } });
+    (textAreaRef.current as HTMLTextAreaElement).parentElement!.classList.add(
+      "asideShow"
+    );
+    (
+      textAreaRef.current as HTMLTextAreaElement
+    ).parentElement!.previousElementSibling?.classList.add("smallMain");
     (textAreaRef.current as HTMLTextAreaElement).focus();
   };
 
   const handleChangeTextArea = () => {
     const description = (textAreaRef.current as HTMLTextAreaElement).value;
     const todo = todoList.find(todo => todo.isSelected);
-    todoDispatch({
-      type: "changeDescription",
-      payload: { id: todo!.id, description },
-    });
+    if (todo) {
+      todoDispatch({
+        type: "changeDescription",
+        payload: { id: todo.id, description },
+      });
+    }
   };
 
+  const handleCloseButton = () => {
+    (
+      textAreaRef.current as HTMLTextAreaElement
+    ).parentElement!.classList.remove("asideShow");
+    (
+      textAreaRef.current as HTMLTextAreaElement
+    ).parentElement!.previousElementSibling?.classList.remove("smallMain");
+  };
   return (
     <div className="container">
-      <div className="mainContent">
-        <section>
-          <h1>THINGS TO DO</h1>
-          <main>
-            <TextBar
-              selectedButton={selectedButton}
-              handleAddTodo={handleAddTodo}
-              handleSearchTodo={handleSearchTodo}
-              inputRef={inputRef}
-              setSelectedButton={setSelectedButton}
-            />
-            <ul ref={todoRef}>
-              <todoHandlerContext.Provider
-                value={{
-                  handleToggleTodo,
-                  handleDeleteTodo,
-                  handleStarButton,
-                  handleEditTodo,
-                  textAreaRef,
-                  handleDescriptionButton,
-                }}
-              >
-                <TodoList
-                  todoList={todoList}
-                  arrangeButton={selectedButton.arrangeButton}
-                />
-              </todoHandlerContext.Provider>
-            </ul>
-          </main>
-        </section>
-        <footer>
-          <buttonHandlerContext.Provider
+      <header>
+        <h1>THINGS TO DO</h1>
+        <TextBar
+          selectedButton={selectedButton}
+          handleAddTodo={handleAddTodo}
+          handleSearchTodo={handleSearchTodo}
+          inputRef={inputRef}
+          setSelectedButton={setSelectedButton}
+        />
+      </header>
+      <main>
+        <ul ref={todoRef}>
+          <todoHandlerContext.Provider
             value={{
-              selectedButton,
-              setSelectedButton,
-              clearInput,
-              focusInput,
+              handleToggleTodo,
+              handleDeleteTodo,
+              handleStarButton,
+              handleEditTodo,
+              textAreaRef,
+              handleDescriptionButton,
             }}
           >
-            <Button></Button>
-          </buttonHandlerContext.Provider>
-          <em>{todoList.length} items left</em>
-        </footer>
-      </div>
+            <TodoList
+              todoList={todoList}
+              arrangeButton={selectedButton.arrangeButton}
+            />
+          </todoHandlerContext.Provider>
+        </ul>
+      </main>
       <aside>
-        <span>Note:</span>
+        <nav>
+          <p>{todoList.find(todo => todo.isSelected)?.todoName}</p>
+          <button onClick={handleCloseButton}>
+            <i className="fa-solid fa-xmark"></i>
+          </button>
+        </nav>
         <textarea ref={textAreaRef} onChange={handleChangeTextArea}></textarea>
       </aside>
+      <footer>
+        <buttonHandlerContext.Provider
+          value={{
+            selectedButton,
+            setSelectedButton,
+            clearInput,
+            focusInput,
+          }}
+        >
+          <Button></Button>
+        </buttonHandlerContext.Provider>
+        <em>{todoList.length} items left</em>
+      </footer>
     </div>
   );
 }

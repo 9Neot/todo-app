@@ -9,7 +9,7 @@ const LeftButtons = () => {
         const { selectedButton, setSelectedButton, clearInput, focusInput } =
           value as IButtonHandler;
         return (
-          <div className="button">
+          <div className="leftButton">
             <button
               title="Add New"
               className={selectedButton.leftButton === 1 ? "selected" : ""}

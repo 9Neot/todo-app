@@ -18,7 +18,7 @@ const TextBar = ({
 }: Props) => {
   return (
     <input
-      className={selectedButton.leftButton ? "input" : "hidden"}
+      className={selectedButton.leftButton ? "visibleInput" : "hidden"}
       type="text"
       placeholder={
         selectedButton.leftButton === 1

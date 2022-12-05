@@ -46,7 +46,7 @@ const Todo = ({ todo }: Props) => {
               }}
               disabled={true}
             />
-            <div className="button">
+            <div className="todoButton">
               <button title="Edit title" onClick={handleEditButton}>
                 <i className="fa-solid fa-pen-to-square"></i>
               </button>
